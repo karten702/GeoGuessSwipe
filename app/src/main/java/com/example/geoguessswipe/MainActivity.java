@@ -32,13 +32,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
                                             GeoObject.PRE_DEFINED_GEO_OBJECT_ANSWERS[i]));
         }
 
-        final RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(false);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         final GeoObjectAdapter adapter = new GeoObjectAdapter(this, geoObjects);
         recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
         recyclerView.addOnItemTouchListener(this);
 
         gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
@@ -77,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
                 int position = (viewHolder.getAdapterPosition());
                 GeoObject thisObject = geoObjects.get(position);
                 if(!thisObject.getInEurope()){
-                    Toast.makeText(getBaseContext(), getString(R.string.correctAnswer) + thisObject.getGeoName() + getString(R.string.notInEurope), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), getString(R.string.correctAnswer) + " " + thisObject.getGeoName() + " " + getString(R.string.notInEurope), Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(getBaseContext(), getString(R.string.wrongAnswer) + thisObject.getGeoName() + getString(R.string.isInEurope), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), getString(R.string.wrongAnswer) + " " + thisObject.getGeoName() + " " + getString(R.string.isInEurope), Toast.LENGTH_SHORT).show();
             }
         };
 
